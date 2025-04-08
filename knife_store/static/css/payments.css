@@ -1,0 +1,161 @@
+/* Общие стили для контейнера карт */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Стили для каждой карты */
+.card {
+    width: 200px;
+    height: 120px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #000000; /* Черный цвет для текста по умолчанию */
+    transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении на карту */
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Стили для имени пользователя */
+.card .user-name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+/* Стили для номера карты */
+.card .card-number {
+    font-size: 1.0rem;
+    font-weight: bold;
+    margin: 10px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Стили для банка */
+.card .bank {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+/* Стили для баланса */
+.card .balance {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #000000; /* Черный для баланса */
+}
+
+.green-gradient {
+    background: linear-gradient(135deg, #2fd40e, #007766) !important;
+}
+
+.gold-gradient {
+    background: linear-gradient(135deg, #ffd700, #ffcc66) !important;
+}
+
+.blue-gradient {
+    background: linear-gradient(135deg, #2541bd, #004466) !important;
+}
+
+.purple-gradient {
+    background: linear-gradient(135deg, #9023bb, #003344) !important;
+}
+
+.orange-gradient {
+    background: linear-gradient(135deg, #ffaa00, #cc6600) !important;
+}
+
+.no-gradient {
+    background: linear-gradient(135deg, #00ffcc, #007766) !important;
+}
+
+/* Стили для пустого контейнера карт (если карт нет) */
+.cards-container:empty {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* Стили для кнопки добавления карты */
+.add-card-btn {
+    display: inline-block;
+    background-color: #222; /* Темно-серый фон */
+    color: #00ffff; /* Неоновый голубой текст */
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(-0.2cm);
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+/* Эффект при наведении на кнопки */
+.add-card-btn:hover, .delete-card-btn:hover {
+    background-color: #00ffff;
+    color: #222;
+    border-color: #00ffff;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('/static/fonts/20927.ttf') format('truetype');
+}
+
+/* ===== Основные настройки ===== */
+body {
+    font-family: 'MyCustomFont', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #222; /* Темно-серый фон */
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.delete-card-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: #00ffff; /* Неоновый голубой текст */
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0;
+    text-decoration: none;
+}
+
+.delete-card-btn:hover {
+    color: #00cccc;
+}
+
+/* При наведении меняем фон */
+.delete-card-btn:focus {
+    outline: none;
+}

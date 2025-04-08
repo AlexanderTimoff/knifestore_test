@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Knife store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users.css' %}">
+</head>
+<body>
+    {% block header %}
+    <header>
+        <a href="{% url 'home' %}">
+            <h1>Knife store</h1>
+        </a>
+        <nav>
+            <ul>
+                {% if is_authenticated %}
+                <a href="{% url 'user_cabinet' %}">Личный кабинет</a>
+                <a href="{% url 'product_search' %}">Поиск</a>
+                <a href="{% url 'create_product' %}">+ Подать объявление</a>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Выйти</button>
+                </form>
+                {% else %}
+                <li><a href="{% url 'login' %}">Войти</a></li>
+                <li><a href="{% url 'register' %}">Регистрация</a></li>
+                <a href="{% url 'product_search' %}">Поиск</a>
+                <a href="{% url 'create_product' %}">+ Подать объявление</a>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    {% endblock %}
+
+    <div class="content">
+        {% block content %}
+        
+        <!-- Секция для всех объявлений -->
+        <div class="products-container">
+            <!-- Поднятые объявления -->
+            {% if top_ads %}
+                {% for product in top_ads %}
+                    <div class="product-card top-ad">
+                        <a href="{% url 'detail_ad' product.id %}">
+                            {% if product.images.first %}
+                                <img src="{{ product.images.first.image.url }}" class="product-image" alt="{{ product.brand }} - {{ product.model }}">
+                            {% else %}
+                                <img src="{% static 'images/default_product.jpg' %}" alt="Default image" class="ad-image">
+                            {% endif %}
+                        </a>
+                        <div class="product-info">
+                            <p><strong>{{ product.brand }} - {{ product.model }}</strong></p>
+                            <p>{{ product.price }} KZT</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- Обычные объявления -->
+            {% for product in products %}
+                {% if not product.is_top %}
+                    <div class="product-card {% if product.is_highlighted %}highlighted-ad{% endif %}">
+                        <a href="{% url 'detail_ad' product.id %}">
+                            {% if product.images.first %}
+                                <img src="{{ product.images.first.image.url }}" class="product-image" alt="{{ product.brand }} - {{ product.clas }}">
+                            {% else %}
+                                <img src="{% static 'images/default_product.jpg' %}" alt="Default image" class="ad-image">
+                            {% endif %}
+                        </a>
+                        <div class="product-info">
+                            <p><strong>{{ product.brand }} - {{ product.clas }}</strong></p>
+                            <p>{{ product.price }} KZT</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Knife store. All rights reserved.</p>
+        <a href="{% url 'admin:index' %}">Adm</a>
+        <a href="{% url 'about' %}">Developer</a>
+    </footer>
+
+    {% block script %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

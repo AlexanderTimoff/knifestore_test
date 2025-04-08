@@ -1,0 +1,59 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/chat_room.css' %}">
+
+{% block content %}
+<h1>Чат с 
+    {% if request.user == chat.buyer %}
+        {{ chat.seller.username }}
+    {% else %}
+        {{ chat.buyer.username }}
+    {% endif %}
+</h1>
+
+<div class="chat-container">
+    <div class="chat-section">
+        <ul>
+            {% for message in messages %}
+                <li class="{% if message.sender == request.user %}my-message{% else %}other-message{% endif %}">
+                    {% if message.sender == request.user %}
+                        <strong>Вы:</strong> {{ message.text }}<span class="time">{{ message.created_at|date:"H:i" }}</span>
+                    {% else %}
+                        <strong>{{ message.sender.username }}:</strong> {{ message.text }}<span class="time">{{ message.created_at|date:"H:i" }}</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <form method="POST" action="{% url 'chat:send_message' chat_id=chat.id %}">
+            {% csrf_token %}
+            <textarea name="message" placeholder="Напишите сообщение..." required></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <!-- Блок фотографий справа -->
+    <div class="images-section">
+        <div class="main-image">
+            {% if chat.product.images.first %}
+                <img id="selected-image" src="{{ chat.product.images.first.image.url }}" alt="Selected product Image">
+            {% else %}
+                <img src="{% static 'images/default_product.jpg' %}" alt="Default image" class="ad-image">
+            {% endif %}
+        </div>
+        <div class="image-thumbnails">
+            {% for image in chat.product.images.all %}
+                <img src="{{ image.image.url }}" alt="Image of {{ chat.product.clas }}" class="thumbnail" onclick="showImage(this)">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<a href="{% url 'chat:chat_list' %}" class="btn btn-primary">Все чаты</a>
+<p></p>
+<a href="{% url 'home' %}" class="btn btn-primary">Главная</a>
+{% endblock %}
+
+<script>
+    function showImage(imageElement) {
+        var mainImage = document.getElementById('selected-image');
+        mainImage.src = imageElement.src;
+    }
+</script>

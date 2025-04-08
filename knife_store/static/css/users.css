@@ -1,0 +1,58 @@
+/* users.css */
+
+/* Общие стили для заголовка */
+.user-title {
+    color: #00ffff; /* Цвет заголовка */
+    font-size: 28px; /* Размер шрифта */
+    margin-bottom: 20px; /* Отступ снизу */
+    text-align: center; /* Центрирование текста */
+}
+
+/* Стили для формы */
+
+
+/* Стили для кнопки */
+button {
+    display: inline-block;
+    background-color:  #123b41;
+    color: #00ffff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(-0.2cm);
+}
+
+button:hover {
+    background-color: #ffffff;
+    color: #00ffff;
+}
+/* Общие стили для формы */
+form {
+    max-width: 400px;  /* Устанавливаем максимальную ширину формы */
+    margin: 0 auto;    /* Центрируем форму */
+}
+
+/* Стили для полей ввода */
+.form-field {
+    margin-bottom: 20px;  /* Увеличиваем расстояние между полями ввода */
+}
+
+input{
+    width: 100%;  /* Устанавливаем одинаковую ширину для всех полей ввода */
+    padding: 10px;  /* Увеличиваем размер шрифта и отступы внутри поля */
+    border: 1px solid #ccc;  /* Граница поля ввода */
+    border-radius: 5px;  /* Сглаживаем углы полей */
+}
+
+
+
+/* Стили для блока с ошибками */
+.error-message {
+    color: red;  /* Красный цвет для ошибок */
+    font-size: 14px;  /* Размер шрифта ошибок */
+    margin-top: 5px;  /* Отступ сверху */
+}

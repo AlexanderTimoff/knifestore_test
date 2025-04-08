@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пополнение баланса</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Общие стили для страницы */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Светлый фон */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6a4c9c;
+        }
+
+        h2 {
+            text-align: center;
+            color: #555;
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+
+        /* Стили для формы */
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #6a4c9c;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #6a4c9c;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5b3a7b;
+        }
+
+        /* Стили для ссылки "Вернуться к списку карт" */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #6a4c9c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #4e2b6b;
+            text-decoration: underline;
+        }
+
+        /* Стили для уведомлений */
+        .swal2-popup {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Пополнение баланса</h1>
+<h2>Тут должна быть интегрированна настоящая платежная система, но это наверно очень дорого,поэтому пока что деньги бесконечные :D</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="card_id">Выберите карту:</label>
+        <select name="card_id" id="card_id" required>
+            {% for card in cards %}
+            <option value="{{ card.id }}">Карта {{ card.card_number }} (Баланс: {{ card.balance }} Тг)</option>
+            {% endfor %}
+        </select>
+
+        <label for="amount">Сумма пополнения (Тг):</label>
+        <input type="number" name="amount" id="amount" step="0.01" min="1" required>
+
+        <button type="submit">Пополнить</button>
+    </form>
+
+    <a href="{% url 'card_list' %}">Вернуться к списку карт</a>
+
+    {% if notification %}
+    <script>
+        Swal.fire({
+            title: "{{ notification_type|capfirst }}",
+            text: "{{ notification }}",
+            icon: "{{ notification_type }}",
+            confirmButtonText: "OK"
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

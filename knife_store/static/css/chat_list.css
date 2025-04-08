@@ -1,0 +1,121 @@
+/* Подключаем кастомный шрифт */
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('/static/fonts/20927.ttf') format('truetype');
+}
+
+/* Применяем кастомный шрифт ко всем элементам */
+body {
+    font-family: 'MyCustomFont', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #222; /* Темно-серый фон */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Контейнер для контента */
+.content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    color: #00ffff; /* Неоновый голубой текст */
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+/* Заголовок страницы */
+h1 {
+    font-size: 24px;
+    color: #00ffff; /* Неоновый голубой заголовок */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Список чатов */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+/* Каждый элемент списка чатов */
+li {
+    background-color: #444;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Эффект при наведении на элемент списка */
+li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ссылки на чат */
+a {
+    color: #00ffff; /* Неоновый голубой ссылки */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+}
+
+/* Эффект при наведении на ссылку */
+a:hover {
+    color: #009999;
+    text-decoration: underline;
+}
+
+/* Сообщение, если нет чатов */
+p {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+}
+
+.back {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Эффект при наведении на кнопку */
+.back:hover {
+    background-color: #009999;
+    color: white;
+}
+
+/* Центрирование контейнера чатов */
+.chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.chat-time {
+    margin-left: auto;
+    font-size: 12px;
+    color: #00ffff; /* Неоновый голубой для времени */
+}

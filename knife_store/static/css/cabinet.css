@@ -1,0 +1,131 @@
+@font-face {
+    font-family: 'MyCustomFont'; /* Название шрифта */
+    src: url('/static/fonts/20927.ttf') format('truetype'); /* Путь к шрифту */
+}
+
+body {
+    font-family: 'MyCustomFont', Arial, sans-serif; /* Применяем ваш шрифт, если он настроен */
+    margin: 0;
+    padding: 20px;
+    background-color: #222; /* Темно-серый фон */
+    color: #ffffff; /* Белый текст */
+    line-height: 1.6;
+}
+
+h1, h2 {
+    color: #ffffff; /* Белый цвет для заголовков */
+}
+
+/* Стили для блока информации о пользователе */
+.user-info, .user-ads {
+    background-color: #333; /* Темный фон для блоков */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ссылки */
+a {
+    color:  #00ffff; /* Неоновый голубой цвет для ссылок */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для изображений объявлений */
+.ad-image {
+    width: 150px; /* Ширина изображения */
+    height: 100px; /* Высота изображения */
+    object-fit: cover; /* Обрезка изображения, чтобы заполнить заданные размеры */
+    border-radius: 5px; /* Закругленные углы (опционально) */
+    margin-bottom: 10px; /* Отступ снизу */
+    display: block; /* Убедитесь, что изображение отображается как блочный элемент */
+}
+
+/* Стили для списка объявлений */
+.user-ads ul {
+    list-style: none; /* Убираем маркеры списка */
+    padding: 0;
+}
+
+.user-ads li {
+    display: flex; /* Расположим изображение и текст в строку */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    margin-bottom: 20px; /* Отступ между объявлениями */
+    border: 1px solid #444; /* Рамка вокруг объявления */
+    border-radius: 10px; /* Закругление рамки */
+    padding: 10px; /* Внутренний отступ */
+    background-color: #333; /* Темный фон для объявления */
+}
+
+.user-ads li img {
+    margin-right: 15px; /* Отступ между изображением и текстом */
+}
+
+/* Стили для кнопок */
+button {
+    background-color: #00ffff; /* Неоновый голубой фон кнопок */
+    color: #222; /* Темный текст на кнопке */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #00cccc; /* Темнее при наведении */
+}
+
+/* Контейнер для информации о пользователе и карт */
+.user-info-container {
+    display: flex; /* Flexbox для двух колонок */
+    justify-content: space-between; /* Разделяет пространство между элементами */
+    gap: 20px; /* Отступ между блоками */
+    align-items: stretch; /* Растягиваем оба блока на одинаковую высоту */
+}
+
+/* Стили для блока информации о пользователе */
+.user-info {
+    flex: 1; /* Занимает доступное пространство */
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex; /* Flexbox для дочерних элементов */
+    flex-direction: column; /* Вертикальное размещение содержимого */
+    height: 100%; /* Растягиваем блок по высоте */
+    min-height: 0; /* Убираем минимальную высоту */
+}
+
+/* Стили для контейнера карт */
+.cards-info {
+    flex: 1; /* Занимает доступное пространство */
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex; /* Flexbox для дочерних элементов */
+    flex-direction: column; /* Вертикальное размещение содержимого */
+    height: 100%; /* Растягиваем блок по высоте */
+    min-height: 0; /* Убираем минимальную высоту */
+}
+
+/* Стили для каждого элемента карты */
+.card {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+.card .bank {
+    font-style: italic;
+}

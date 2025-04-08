@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="{% static 'css/cabinet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/payments.css' %}">
+</head>
+<body>
+    <h1>Личный кабинет</h1>
+
+    <!-- Контейнер для информации о пользователе и карт -->
+    <div class="user-info-container">
+        <div class="user-info">
+            <h2>Информация о пользователе</h2>
+            <p><strong>Логин:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Телефон:</strong> {{ user.phone_number }}</p>
+        </div>
+
+        <!-- Контейнер для карт -->
+        <div class="cards-info">
+            <a href="{% url 'card_list' %}"><h2>Ваши карты</h2></a>
+            <a href="{% url 'recharge_balance' %}">Пополнить баланс</a>
+            <a href="{% url 'add_card' %}">Добавить карту</a>
+        </div>
+    </div>
+    
+    <!-- Контейнер для объявлений -->
+    <div class="user-ads">
+        <a href="{% url 'chat:chat_list' %}" class="btn btn-primary">| Ваши чаты |</a>
+        <a href="{% url 'create_product' %}" class="btn btn-primary">+ Добавить обьявление |</a>
+        <h2>Ваши объявления</h2>
+        
+        {% if user_ads %}
+        <ul>
+            {% for product in user_ads %}
+                <li>
+                    <a href="{% url 'detail_ad' product.id %}">
+                        {% if product.images.first %}
+                            <img src="{{ product.images.first.image.url }}" alt="Image of {{ product.brand }} {{ product.model }}" class="ad-image">
+                        {% else %}
+                            <img src="{% static 'images/default_product.jpg' %}" alt="Default image" class="ad-image">
+                        {% endif %}
+                    </a>
+                    <div>
+                        <h2><a href="{% url 'detail_ad' product.id %}">{{ product.brand|capfirst }} {{ product.model }} ({{ product.year }})</a></h2>
+                        <p>{{ product.price }} KZT</p>
+                        {% if product.ad_status %}
+                        <p><strong>Статус рекламы:</strong> {{ product.ad_status }}</p>
+                        {% endif %}
+                        <a href="{% url 'promote_ad' product_id=product.id %}">Рекламировать обьявление |</a>
+                        <a href="{% url 'edit_ad' product.id %}">Редактировать |</a>
+                        <a href="{% url 'delete_ad' product.id %}">Удалить</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>У вас пока нет объявлений.</p>
+        {% endif %}
+    </div>
+
+    <!-- Ссылка на главную страницу -->
+    <a href="{% url 'home' %}">Главная</a>
+</body>
+</html>

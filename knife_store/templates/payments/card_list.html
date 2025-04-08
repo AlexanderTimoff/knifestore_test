@@ -1,0 +1,21 @@
+{% load static %}
+{% load card_filters %}
+<link rel="stylesheet" href="{% static 'css/payments.css' %}">
+
+<a href="{% url 'add_card' %}" class="add-card-btn">Добавить карту</a> <!-- добавлен класс для стилизации кнопки -->
+<a href="{% url 'user_cabinet' %}" class="add-card-btn">Назад</a> <!-- добавлен класс для стилизации кнопки -->
+
+<div class="cards-container">
+    {% for card in cards %}
+    <a href="{% url 'delete_card' card.id %}" class="delete-card-btn" onclick="return confirm('Вы уверены, что хотите удалить эту карту?')">&times;</a>
+    <div class="card {% if card.bank == 'Halyq Bank' %}green-gradient{% elif card.bank == 'Kaspi Bank' %}gold-gradient{% elif card.bank == 'RBK Bank' %}blue-gradient{% elif card.bank == 'Forte Bank' %}purple-gradient{% elif card.bank == 'Jusan Bank' %}orange-gradient{% else %}no-gradient{% endif %}">
+        <p class="user-name">{{ card.user.username }}</p>
+        <p class="card-number">{{ card.card_number|add_card_spaces }}</p>
+        <p class="bank">{{ card.bank }}</p>
+        <p class="balance">{{ card.balance }} KZT</p>
+    </div>
+    
+    {% endfor %}
+
+    
+

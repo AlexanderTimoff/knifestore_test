@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'MyCustomFont'; /* Название шрифта */
+    src: url('/static/fonts/20927.ttf') format('truetype'); /* Путь к шрифту */
+}
+
+body {
+    font-family: 'MyCustomFont', sans-serif; /* Применяем кастомный шрифт ко всему тексту */
+    background-color: #222; /* Темно-серый фон */
+    color: #00ffff; /* Неоновый голубой текст */
+}
+
+form {
+    background-color: #333; /* Темный фон для формы */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto; /* Центрируем форму */
+    font-family: 'MyCustomFont', sans-serif; /* Применяем кастомный шрифт к форме */
+}
+
+/* Стили для полей формы */
+form input, form select, form textarea {
+    width: 100%; /* Сделаем поля на всю ширину */
+    padding: 6px; /* Увеличим отступы */
+    margin: 10px 0;
+    border: 1px solid #00ffff; /* Голубая рамка */
+    border-radius: 5px; /* Закругленные углы */
+    background-color: #444; /* Темный фон для полей */
+    color: #00ffff; /* Неоновый голубой текст */
+    font-size: 16px; /* Размер шрифта */
+}
+
+form input[type="file"] {
+    padding: 7px;
+    border: 1px solid #00ffff;
+    background-color: #444;
+}
+
+/* Стили для кнопки отправки */
+form button {
+    background-color: #00ffff; /* Яркий голубой цвет кнопки */
+    color: #222;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Кнопка на всю ширину */
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #008080; /* Темный голубой оттенок при наведении */
+}
+
+/* Стили для текста внутри формы (например, метки или ошибок) */
+form p {
+    color: #00ffff; /* Голубой текст */
+}
+
+form .errorlist {
+    color: #ff6347; /* Красный цвет для ошибок */
+    list-style-type: none;
+    padding-left: 0;
+}
+
+form .errorlist li {
+    margin-bottom: 10px;
+}

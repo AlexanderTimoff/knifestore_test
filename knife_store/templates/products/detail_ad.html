@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="product-details-wrapper">
+            <div class="product-info">
+                <h1>{{ product.brand|title }} - {{ product.clas }}</h1>
+                <div class="product-details">
+                    <p><strong>Цена:</strong> {{ product.price }} KZT</p>
+                    <p><strong>Название:</strong> {{ product.brand }}</p>
+                    <p><strong>Редкость:</strong> {{ product.clas }}</p>
+                    <p><strong>Год:</strong> {{ product.year }}</p>
+                    <p><strong>Описание:</strong> {{ product.description }}</p>  
+                </div>
+                <div class="contact-seller">
+                    <button id="show-contact-button" class="button-common">
+                        Связаться с продавцом
+                    </button>
+                    <p id="seller-contact" style="display: none;">
+                        Телефон: {{ product.additional_phone }}
+                        <a href="{% url 'chat:start_chat' seller_id=seller.id  product_id=product.id %}" class="button-common" >Написать</a>
+                    </p>
+                </div>
+                
+            </div>
+            <div class="product-images">
+                <div class="main-image">
+                    {% if product.images.first %}
+                    <img id="selected-image" src="{{ product.images.first.image.url }}" alt="Selected product Image">
+                    {% else %}
+                    <img src="{% static 'images/default_product.jpg' %}" alt="Default image" class="ad-image">
+                    {% endif %}
+                </div>
+                <div class="image-thumbnails">
+                    {% for image in product.images.all %}
+                    <img src="{{ image.image.url }}" alt="Image of {{ product.brand }}" class="thumbnail" onclick="showImage(this)">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'home' %}" class="back-to-home">Главная</a>
+    <script>
+        document.getElementById('show-contact-button').addEventListener('click', function () {
+            const contactInfo = document.getElementById('seller-contact');
+            contactInfo.style.display = 'block';
+            this.style.display = 'none'; 
+        });
+    </script>
+    <script>
+        function showImage(thumbnail) {
+            document.getElementById('selected-image').src = thumbnail.src;
+        }
+    </script>
+
+    
+</body>
+</html>

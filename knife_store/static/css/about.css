@@ -1,0 +1,55 @@
+
+@import url('https://fonts.cdnfonts.com/css/major-mono-display-2');
+@import url('https://fonts.cdnfonts.com/css/sf-mono');
+
+
+body{
+    margin: 0;
+}
+#img{
+    position: fixed;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    height: 200px;
+    text-shadow: 0 0 100px rgba(255, 255, 255, 0.952);
+}
+.boss{
+    font-family: 'Major Mono Display', sans-serif;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.952);
+    font-size: 65px;
+    color: rgb(0, 0, 0);
+    top: 30px;
+}
+.miniboss{
+    font-family: 'SF Mono', sans-serif;
+    font-size: 35px;
+    top: 25px;
+}
+
+
+.container {
+    font-family: 'SF Mono', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    height: 100vh;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(172, 200, 236);
+    
+   
+}
+
+.jir,
+.nejir,
+.stack,
+.experience {
+    margin-bottom: 10px; /* Отступ между строками */
+    text-align: center;
+}
+
+.boss:hover{
+    color: rgb(255, 255, 255);    
+}

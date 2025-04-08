@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+{% comment %} {% block header %}{% endblock %} {% endcomment %}
+{% block content %} 
+<h1 class="user-title">Вход</h1>
+    <form id="loginForm" method="post">  
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+    
+    <div class="error-message" style="display: none;"></div> 
+    <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+{% endblock %} 
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#loginForm').on('submit', function(e) {
+            e.preventDefault(); 
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "login" %}', 
+                data: {
+                    username: $('#id_username').val(), 
+                    password: $('#id_password').val(), 
+                    csrfmiddlewaretoken: '{{ csrf_token }}' 
+                },
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = '/'; 
+                    } else {
+                        $('.error-message').text(response.error).show(); 
+                    }
+                },
+                error: function() {
+                    $('.error-message').text('Не правильное имя пользователя или пароль').show();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

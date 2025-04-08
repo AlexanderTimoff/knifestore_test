@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/chat_list.css' %}">
+{% block content %}
+<h1>Ваши чаты</h1>
+<ul>
+    {% for chat in chats %}
+        <!-- Проверяем, кто является текущим пользователем, и выводим имя собеседника -->
+        {% if chat.buyer == request.user %}
+            <li>
+                <a href="{% url 'chat:chat_room' chat_id=chat.id %}">
+                    Чат с {{ chat.seller.username }} по ножу {{ chat.product.brand|capfirst }} {{ chat.product.clas }}
+                    <span class="chat-time">(Создан {{ chat.created_at|date:"d.m.Y | H:i" }})</span>
+                </a>
+            </li>
+        {% elif chat.seller == request.user %}
+            <li>
+                <a href="{% url 'chat:chat_room' chat_id=chat.id %}">
+                    Чат с {{ chat.buyer.username }} по вашему ножу {{ chat.product.brand|capfirst }} {{ chat.product.clas }}
+                    <span class="chat-time">(Создан {{ chat.created_at|date:"d.m.Y | H:i" }})</span>
+                </a>
+            </li>
+        {% endif %}
+    {% empty %}
+        <p>У вас нет чатов.</p>
+    {% endfor %}
+</ul>
+<a href="{% url 'user_cabinet' %}" class='back'>Назад в кабинет</a>
+{% endblock %}

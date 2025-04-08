@@ -1,0 +1,133 @@
+<head>
+    <style>
+        /* Общие стили для страницы */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: #1e1e3a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .ad-info {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            text-align: center;
+            color: #555;
+        }
+
+        .ad-info strong {
+            color: #000;
+        }
+
+        /* Стили для формы */
+        .payment-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-input {
+            font-size: 1rem;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-input:focus {
+            border-color: #4e2b6b;
+            outline: none;
+        }
+
+        /* Стили для кнопки */
+        .btn-submit {
+            background-color: #1e1e3a;
+            color: white;
+            font-size: 1.1rem;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn-submit:hover {
+            background-color: #4e2b6b;
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .ad-info {
+                font-size: 1rem;
+            }
+
+            .payment-form {
+                padding: 15px;
+                width: 90%;
+            }
+
+            .btn-submit {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<h3>Оплата рекламы</h3>
+
+<p>Вы выбрали рекламу типа: {{ ad_type }}</p>
+<p>Сумма к оплате: {{ price }} Тг</p>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="card">Выберите карту:</label>
+    <select name="card_id" id="card" required>
+        {% for card in cards %}
+            <option value="{{ card.id }}">{{ card.card_number|slice:"-4:" }} - {{ card.bank }} (Баланс: {{ card.balance }} Тг)</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">Оплатить</button>
+    <div id="error-message" style="display: none; text-align: center; color: red; margin-top: 20px; font-weight: bold;">
+        {{ error_message }}
+    </div>
+    <a href="{% url 'user_cabinet' %}" class="back-link">Вернуться в личный кабинет</a>
+</form>
+<script>
+    // Получаем сообщение ошибки из контекста
+    var errorMessage = "{{ error_message|escapejs }}";
+
+    // Если сообщение об ошибке существует, показываем его
+    if (errorMessage) {
+        var errorDiv = document.getElementById('error-message');
+        errorDiv.style.display = 'block';  // Показываем блок с ошибкой
+    }
+</script>
+</body>
+</html>

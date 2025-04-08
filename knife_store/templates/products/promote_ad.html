@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продвижение объявления</title>
+    <link rel="stylesheet" href="{% static 'css/promote_ad.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Продвижение объявления</h1>
+        <h2>Объявление: {{ product.brand|capfirst }} {{ product.clas }} </h2>
+        <img class="image" src="{{ product.images.first.image.url }}" alt="Selected product Image">
+        <p>Цена: {{ product.price }} тг</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="ad-options">
+                <label>
+                    <input type="radio" name="ad_type" value="none" 
+                           {% if product.ad_type == "none" %}checked{% endif %}>
+                    Без рекламы (Бесплатно)
+                </label>
+                <label>
+                    <input type="radio" name="ad_type" value="highlight" 
+                           {% if product.ad_type == "highlight" %}checked{% endif %}>
+                    Выделение рамкой (1000 тг)
+                </label>
+                <label>
+                    <input type="radio" name="ad_type" value="top" 
+                           {% if product.ad_type == "top" %}checked{% endif %}>
+                    Поднятие на первое место (2000 тг)
+                </label>
+                <label>
+                    <input type="radio" name="ad_type" value="special" 
+                           {% if product.ad_type == "special" %}checked{% endif %}>
+                    Спецблок (5000 тг)
+                </label>
+            </div>
+            <button type="submit" class="btn">Применить</button>
+        </form>
+        <div id="error-message" style="display: none; text-align: center; color: red; margin-top: 20px; font-weight: bold;">
+            {{ error_message }}
+        </div>
+
+        <a href="{% url 'user_cabinet' %}" class="back-link">Вернуться в личный кабинет</a>
+    </div>
+    <script>
+        // Получаем сообщение ошибки из контекста
+        var errorMessage = "{{ error_message|escapejs }}";
+    
+        // Если сообщение об ошибке существует, показываем его
+        if (errorMessage) {
+            var errorDiv = document.getElementById('error-message');
+            errorDiv.style.display = 'block';  // Показываем блок с ошибкой
+        }
+    </script>
+</body>
+</html>
